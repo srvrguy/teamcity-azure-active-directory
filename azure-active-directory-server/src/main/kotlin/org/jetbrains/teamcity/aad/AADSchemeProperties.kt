@@ -24,7 +24,18 @@ import jetbrains.buildServer.serverSide.auth.LoginConfiguration
 class AADSchemeProperties(private val loginConfiguration: LoginConfiguration) {
 
     val appOAuthEndpoint: String?
-        get() = properties?.get(AADConstants.AUTH_ENDPOINT_SCHEME_PROPERTY_KEY)
+        get() {
+            val endpointLocation = properties?.get(AADConstants.AUTH_ENDPOINT_LOCATION)
+
+            val endpointURL = when(endpointLocation) {
+                "usgov" -> "https://login.microsoftonline.us"
+                "de" -> "https://login.microsoftonline.de"
+                "cn" -> "https://login.chinacloudapi.cn"
+                else -> "https://login.microsoftonline.com" //Default Azure Global Cloud
+            }
+
+            return "$endpointURL/$tenantId/oauth2/authorize"
+        }
 
     val clientId: String?
         get() = properties?.get(AADConstants.CLIENT_ID_SCHEME_PROPERTY_KEY)
@@ -34,6 +45,9 @@ class AADSchemeProperties(private val loginConfiguration: LoginConfiguration) {
 
     val isSchemeConfigured: Boolean
         get() = properties != null
+
+    private val tenantId: String?
+        get() = properties?.get(AADConstants.TENANT_ID_SCHEME_PROPERTY_KEY)
 
     private val properties: Map<String, String>?
         get() {

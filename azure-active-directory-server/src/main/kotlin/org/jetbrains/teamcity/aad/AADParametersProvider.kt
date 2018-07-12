@@ -23,8 +23,11 @@ class AADParametersProvider {
     val allowMatchingUsersByEmail: String
         get() = AADConstants.ALLOW_MATCHING_USERS_BY_EMAIL
 
-    val authEndpoint: String
-        get() = AADConstants.AUTH_ENDPOINT_SCHEME_PROPERTY_KEY
+    val azureEndpoint: String
+        get() = AADConstants.AUTH_ENDPOINT_LOCATION
+
+    val tenantId: String
+        get() = AADConstants.TENANT_ID_SCHEME_PROPERTY_KEY
 
     val applicationId: String
         get() = AADConstants.CLIENT_ID_SCHEME_PROPERTY_KEY

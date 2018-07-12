@@ -55,16 +55,9 @@ class AADAuthenticationScheme(loginConfiguration: LoginConfiguration,
 
     override fun validate(properties: Map<String, String>): Collection<String>? {
         val errors = arrayListOf<String>()
-        properties[AADConstants.AUTH_ENDPOINT_SCHEME_PROPERTY_KEY].apply {
-            if (this.isNullOrBlank()) {
-                errors.add("OAuth 2.0 authorization endpoint should be specified.")
-            } else {
-                try {
-                    URL(this)
-                } catch (e: MalformedURLException) {
-                    errors.add("Invalid URL was specified for OAuth 2.0 authorization endpoint.")
-                }
-            }
+
+        if (properties[AADConstants.TENANT_ID_SCHEME_PROPERTY_KEY].isNullOrBlank()) {
+            errors.add("Tenant ID should be specified.")
         }
 
         if (properties[AADConstants.CLIENT_ID_SCHEME_PROPERTY_KEY].isNullOrBlank()) {

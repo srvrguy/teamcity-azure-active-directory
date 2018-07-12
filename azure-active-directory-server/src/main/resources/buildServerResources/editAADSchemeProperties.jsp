@@ -56,13 +56,13 @@
     </tr>
     <tr>
         <th>
-            <label for="${params.authEndpoint}">Endpoint URL:<l:star/></label>
+            <label for="${params.tenantId}">Tenant ID:<l:star/></label>
         </th>
         <td>
-            <props:textProperty name="${params.authEndpoint}" className="longField" />
-            <span class="error" id="error_${params.authEndpoint}"></span>
+            <props:textProperty name="${params.tenantId}" className="longField" style="width: 26em;"/>
+            <span class="error" id="error_${params.tenantId}"></span>
             <span class="grayNote">
-                Azure OAuth 2.0 authorization endpoint URL. ${help}
+                Identifier of the Active Directory tenant. ${help}
             </span>
         </td>
     </tr>
@@ -71,11 +71,26 @@
             <label for="${params.applicationId}">Application ID:<l:star/></label>
         </th>
         <td>
-            <props:textProperty name="${params.applicationId}" className="longField" />
+            <props:textProperty name="${params.applicationId}" className="longField" style="width: 26em;"/>
             <span class="error" id="error_${params.applicationId}"></span>
             <span class="grayNote">
                 Azure Active Directory application identifier. ${help}
             </span>
+        </td>
+    </tr>
+    <tr>
+        <th>
+            <label for="${params.azureEndpoint}">Azure Cloud Instance:</label>
+        </th>
+        <td>
+            <props:selectProperty name="${params.azureEndpoint}" className="mediumField">
+                <props:option value="">&lt;Default&gt;</props:option>
+                <props:option value="usgov">Azure for US Government</props:option>
+                <props:option value="de">Azure for Germany</props:option>
+                <props:option value="cn">Azure for China</props:option>
+            </props:selectProperty>
+            <br/>
+            <span class="grayNote">The Azure Cloud location to use, if you're using a national cloud.</span>
         </td>
     </tr>
     <tr class="advancedSetting">
